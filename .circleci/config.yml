@@ -1,30 +1,27 @@
 version: 2.1
 
-executors:
-  python-executor:
-    docker:
-      - image: circleci/python:3.8
+orbs:
+  python: circleci/python@2.0.1
 
 jobs:
   build-and-test:
-    executor: python-executor
+    docker:
+      - image: cimg/python:3.10.2
     steps:
       - checkout
       - run:
           name: Install Dependencies
           command: |
-            pip install -r requirements.txt
-            pip install junit-xml
+            pip install pytest
       - run:
           name: Run Tests
           command: |
-            python3 -m unittest discover -v > test-results/output.txt
-            python3 -m unittest discover -v | tee test-results/output.xml | junit2html test-results/output.xml test-results/test-report.html
+            pytest --junitxml=test-results/junit.xml TestTriangle.py
       - store_test_results:
           path: test-results
 
 workflows:
   version: 2
-  test-workflow:
+  testing_triangles:
     jobs:
       - build-and-test
