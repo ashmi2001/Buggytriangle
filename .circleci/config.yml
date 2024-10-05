@@ -1,20 +1,22 @@
 version: 2.1
 
 jobs:
-  build:
+  test:
     docker:
-      - image: circleci/python:3.8 # Choose your Python version
+      - image: circleci/python:3.8
     steps:
-      - checkout # Check out the code from the repository
+      - checkout
       - run:
-          name: Run Tests
+          name: Install dependencies
           command: |
-            python -m unittest discover -s test-results  # Adjust command as needed
-      - store_test_results:
-          path: test-results
-
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+      - run:
+          name: Run Unit Tests
+          command: |
+            python -m unittest TestTriangle
 workflows:
   version: 2
-  test:
+  test_workflow:
     jobs:
-      - build
+      - test
