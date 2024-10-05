@@ -1,25 +1,29 @@
 version: 2.1
 
-orbs:
-  python: circleci/python@2.0.1
-
 jobs:
-  build-and-test:
+  test:
     docker:
-      - image: cimg/python:3.10.2
+      - image: circleci/python:3.8  # Use Python 3.8 environment
     steps:
-      - checkout
+      - checkout  # Check out your code from GitHub
+
+      # Set up dependencies
       - run:
-          name: Install Dependencies
-          command: pip install -r requirements.txt
+          name: Set up Python environment and install dependencies
+          command: |
+            python -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+
+      # Run tests
       - run:
-          name: Run Tests
-          command: python TestTriangle.py  # Adjust if necessary
-      - store_test_results:
-          path: test-results
+          name: Run Unit Tests
+          command: |
+            . venv/bin/activate
+            python -m unittest discover
 
 workflows:
   version: 2
-  testing_triangles:
+  test:
     jobs:
-      - build-and-test
+      - test
