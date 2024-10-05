@@ -1,27 +1,22 @@
 version: 2.1
 
-orbs:
-  python: circleci/python@2.0.1
-
 jobs:
-  build-and-test:
+  build:
     docker:
-      - image: cimg/python:3.10.2
+      - image: circleci/python:3.7  # Use Python 3.7 Docker image
+
     steps:
-      - checkout
+      - checkout  # Checkout your GitHub code
+
       - run:
           name: Install Dependencies
           command: |
-            pip install pytest
-      - run:
-          name: Run Tests
-          command: |
-            pytest --junitxml=test-results/junit.xml TestTriangle.py
-      - store_test_results:
-          path: test-results
+            python -m venv venv  # Create virtual environment
+            . venv/bin/activate
+            pip install -r requirements.txt  # Install dependencies from requirements.txt
 
-workflows:
-  version: 2
-  testing_triangles:
-    jobs:
-      - build-and-test
+      - run:
+          name: Run Unit Tests
+          command: |
+            . venv/bin/activate
+            python -m unittest discover  # Run unit tests
