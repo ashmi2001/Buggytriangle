@@ -11,5 +11,4 @@ Identifying and Fixing Bugs: Using test cases to discover defects in the triangl
 Handling Edge Cases: Ensuring the function handles unexpected and invalid inputs such as imaginary numbers, strings, and more than three inputs.
 
 
-**[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/LZbyG1HkEeF4iQfyKNdLeP/9T2h4ZYqJ8XCV36daQdGSd/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/LZbyG1HkEeF4iQfyKNdLeP/9T2h4ZYqJ8XCV36daQdGSd/tree/main)**
-
+**[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/7yHo4A7HD7R1EfKeCKEZPy/Loi2fg4GQbR72Jtq9zzfNH/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/7yHo4A7HD7R1EfKeCKEZPy/Loi2fg4GQbR72Jtq9zzfNH/tree/main)**
