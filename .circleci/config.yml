@@ -13,8 +13,9 @@ jobs:
       - run:
           name: Install Dependencies and Run Tests
           command: |
-            pip install pytest
-            pytest --junitxml=test-results/junit.xml TestTriangle.py
+            pip install xmlrunner  # Install xmlrunner to generate XML output
+            python -m unittest discover -s . -p "TestTriangle.py" | tee test-results/results.txt
+            python -m xmlrunner -o test-results TestTriangle.py  # Run tests and output results in XML format
             
       - store_test_results:
           path: test-results
