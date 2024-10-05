@@ -9,6 +9,7 @@ The primary goal of this file is to demonstrate a simple unittest implementation
 
 import unittest
 import xmlrunner
+import os
 from Triangle import classifyTriangle
   # Import the xmlrunner to generate XML output
 
@@ -78,5 +79,12 @@ class TestTriangles(unittest.TestCase):
 
 if __name__ == '__main__':
     print('Running unit tests')
-    unittest.main()
+    
+    # Create the test-results directory if it doesn't exist
+    os.makedirs('test-results', exist_ok=True)
+    
+    # Run the tests and generate results.xml in the test-results directory
+    with open('test-results/results.xml', 'wb') as output:
+        unittest.main(testRunner=xmlrunner.XMLTestRunner(output=output), verbosity=2)
+
 
