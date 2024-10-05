@@ -11,16 +11,16 @@ jobs:
       - checkout
       - run:
           name: Install Dependencies
-          command: |
-            pip install -r requirements.txt
-            pip install unittest-xml-reporting
+          command: pip install -r requirements.txt
       - run:
-          name: Create test-results directory
-          command: mkdir -p test-results
-      - run:
-          name: Run Unittests
+          name: Run Automated Tests
           command: |
-            python -m unittest discover > test-results/results.xml
+            pytest --junitxml=test-results/results.xml automated_tests/
+      - run:
+          name: Run Manual Tests
+          command: |
+            # Command to run your manual tests, if any
+            # e.g., python manual_tests/run_manual_tests.py
       - store_test_results:
           path: test-results
 
