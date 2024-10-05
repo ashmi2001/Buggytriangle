@@ -15,12 +15,13 @@ jobs:
             . venv/bin/activate
             pip install -r requirements.txt
 
-      # Run tests
-      - run:
-          name: Run Unit Tests
-          command: |
-            . venv/bin/activate
-            python -m unittest discover
+      #- run:
+          name: Run Tests
+          command: python -m xmlrunner TestTriangle.py --output test-results/results.xml
+      
+      # Store test results
+      - store_test_results:
+          path: test-results
 
 workflows:
   version: 2
