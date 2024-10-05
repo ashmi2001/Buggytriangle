@@ -9,19 +9,18 @@ jobs:
 
       # Set up dependencies
       - run:
-         
+          name: Set up Python environment and install dependencies
           command: |
             python -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
 
-      #- run:
-          name: Run Tests
-          command: python -m xmlrunner TestTriangle.py --output test-results/results.xml
-      
-      # Store test results
-      - store_test_results:
-          path: test-results
+      # Run tests
+      - run:
+          name: Run Unit Tests
+          command: |
+            . venv/bin/activate
+            python -m unittest discover
 
 workflows:
   version: 2
