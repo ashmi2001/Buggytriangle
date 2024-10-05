@@ -9,7 +9,7 @@ jobs:
 
       # Set up dependencies
       - run:
-          name: Set up Python environment and install dependencies
+         
           command: |
             python -m venv venv
             . venv/bin/activate
