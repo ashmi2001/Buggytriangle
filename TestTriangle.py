@@ -17,14 +17,6 @@ from Triangle import classifyTriangle
 # class TestTriangle(unittest.TestCase):
 #     ...
 
-if __name__ == '__main__':
-    # Create the test-results directory if it doesn't exist
-    import os
-    os.makedirs('test-results', exist_ok=True)
-    
-    # Run the tests and generate results.xml
-    with open('test-results/results.xml', 'wb') as output:
-        unittest.main(testRunner=xmlrunner.XMLTestRunner(output=output), verbosity=2)
 # This code implements the unit test functionality
 # https://docs.python.org/3/library/unittest.html has a nice description of the framework
 
