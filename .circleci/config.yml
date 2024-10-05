@@ -3,18 +3,18 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/python:3.7
-
+      - image: circleci/python:3.8 # Choose your Python version
     steps:
-      - checkout
+      - checkout # Check out the code from the repository
       - run:
-          name: Install dependencies
+          name: Run Tests
           command: |
-            python -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
-      - run:
-          name: Run tests
-          command: |
-            . venv/bin/activate
-            python -m unittest discover
+            python -m unittest discover -s test-results  # Adjust command as needed
+      - store_test_results:
+          path: test-results
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - build
