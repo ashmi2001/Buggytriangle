@@ -1,29 +1,30 @@
 version: 2.1
 
-orbs:
-  python: circleci/python@2.0.1
+executors:
+  python-executor:
+    docker:
+      - image: circleci/python:3.8
 
 jobs:
   build-and-test:
-    docker:
-      - image: cimg/python:3.10.2
+    executor: python-executor
     steps:
       - checkout
-      
       - run:
-          name: Install Dependencies and Run Tests
+          name: Install Dependencies
           command: |
-            pip install xmlrunner  # Install xmlrunner to generate XML output
-            python -m unittest discover -s . -p "TestTriangle.py"  # Run tests and output results to console
-            
-            # Use xmlrunner to generate results.xml file in test-results directory
-            python -m xmlrunner -o test-results TestTriangle.py
-
+            pip install -r requirements.txt
+            pip install junit-xml
+      - run:
+          name: Run Tests
+          command: |
+            python3 -m unittest discover -v > test-results/output.txt
+            python3 -m unittest discover -v | tee test-results/output.xml | junit2html test-results/output.xml test-results/test-report.html
       - store_test_results:
           path: test-results
 
 workflows:
   version: 2
-  testing_triangles:
+  test-workflow:
     jobs:
       - build-and-test
