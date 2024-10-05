@@ -1,0 +1,29 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@2.0.1
+
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/python:3.10.2
+    steps:
+      - checkout
+      
+      - run:
+          name: Install Dependencies and Run Tests
+          command: |
+            pip install xmlrunner  # Install xmlrunner to generate XML output
+            python -m unittest discover -s . -p "TestTriangle.py"  # Run tests and output results to console
+            
+            # Use xmlrunner to generate results.xml file in test-results directory
+            python -m xmlrunner -o test-results TestTriangle.py
+
+      - store_test_results:
+          path: test-results
+
+workflows:
+  version: 2
+  testing_triangles:
+    jobs:
+      - build-and-test
