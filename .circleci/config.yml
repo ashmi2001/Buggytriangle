@@ -14,9 +14,12 @@ jobs:
           command: |
             pip install pytest
       - run:
+          name: Create test-results directory
+          command: mkdir -p test-results
+      - run:
           name: Run Tests
           command: |
-            pytest --junitxml=test-results/junit.xml TestTriangle.py
+            pytest --junitxml=test-results/results.xml TestTriangle.py
       - store_test_results:
           path: test-results
 
