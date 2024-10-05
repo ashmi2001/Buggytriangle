@@ -9,12 +9,23 @@ jobs:
       - image: cimg/python:3.10.2
     steps:
       - checkout
+      
+      # Create test-results directory
+      - run:
+          name: Create Test Results Directory
+          command: mkdir -p test-results
+      
+      # Install dependencies
       - run:
           name: Install Dependencies
           command: pip install -r requirements.txt
+      
+      # Run tests and generate XML output
       - run:
           name: Run Tests
-          command: python TestTriangle.py  # Adjust if necessary
+          command: python -m xmlrunner TestTriangle.py --output test-results/results.xml
+      
+      # Store test results
       - store_test_results:
           path: test-results
 
