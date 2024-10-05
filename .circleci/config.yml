@@ -14,7 +14,7 @@ jobs:
           command: pip install -r requirements.txt
       - run:
           name: Run Tests
-          command: python TestTriangle.py
+          command: python TestTriangle.py  # Adjust if necessary
       - store_test_results:
           path: test-results
 
