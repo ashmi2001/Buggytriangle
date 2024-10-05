@@ -13,4 +13,3 @@ Handling Edge Cases: Ensuring the function handles unexpected and invalid inputs
 
 **[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/LZbyG1HkEeF4iQfyKNdLeP/9T2h4ZYqJ8XCV36daQdGSd/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/LZbyG1HkEeF4iQfyKNdLeP/9T2h4ZYqJ8XCV36daQdGSd/tree/main)**
 
-[![build status of master](https://travis-ci.org/ashmi2001/Buggytriangle.svg?branch=master)](https://travis-ci.org/ashmi2001/Buggytriangle)
