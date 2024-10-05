@@ -1,31 +1,29 @@
 version: 2.1
 
-orbs:
-  python: circleci/python@2.0.1
-
 jobs:
-  build-and-test:
+  test:
     docker:
-      - image: cimg/python:3.10.2
+      - image: circleci/python:3.8  # Use Python 3.8 environment
     steps:
-      - checkout
+      - checkout  # Check out your code from GitHub
+
+      # Set up dependencies
       - run:
-          name: Install Dependencies
-          command: pip install -r requirements.txt
-      - run:
-          name: Run Automated Tests
+          name: Set up Python environment and install dependencies
           command: |
-            pytest --junitxml=test-results/results.xml automated_tests/
+            python -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+
+      # Run tests
       - run:
-          name: Run Manual Tests
+          name: Run Unit Tests
           command: |
-            # Command to run your manual tests, if any
-            # e.g., python manual_tests/run_manual_tests.py
-      - store_test_results:
-          path: test-results
+            . venv/bin/activate
+            python -m unittest discover
 
 workflows:
   version: 2
-  testing_triangles:
+  test:
     jobs:
-      - build-and-test
+      - test
